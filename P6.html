@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator | Emerald</title>
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #061213;
+            --card-bg: rgba(15, 35, 38, 0.75);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --accent-main: #10b981;
+            --accent-cyan: #06b6d4;
+            --text-main: #f0fdf4;
+            --text-muted: #94a3b8;
+            --radius: 16px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.18) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.18) 0px, transparent 50%);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            padding: 2.5rem 2rem;
+            width: 100%;
+            max-width: 550px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .container h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #34d399, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .quote-box {
+            width: 100%;
+            background: rgba(6, 18, 19, 0.6);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.75rem;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #quote {
+            color: var(--text-main);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        #author {
+            color: var(--accent-main);
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.85rem 1.25rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--accent-main), var(--accent-cyan));
+            color: #061213;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        button:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Random Quote Generator</h1>
+        <div class="quote-box">
+            <p id="quote">Click the button to generate a quote.</p>
+            <h3 id="author">- Author</h3>
+        </div>
+        <button id="quoteBtn" onclick="generateQuote()">Generate Quote</button>
+    </div>
+
+    <script>
+        const quotes = [
+            { quote: "The only way to do great work is to love what you do.", author: "- Steve Jobs" },
+            { quote: "Talk is cheap. Show me the code.", author: "- Linus Torvalds" },
+            { quote: "Programs must be written for people to read, and only incidentally for machines to execute.", author: "- Harold Abelson" },
+            { quote: "Simplicity is the soul of efficiency.", author: "- Austin Freeman" },
+            { quote: "First, solve the problem. Then, write the code.", author: "- John Johnson" }
+        ];
+
+        function generateQuote() {
+            const quoteEl = document.getElementById('quote');
+            const authorEl = document.getElementById('author');
+            quoteEl.style.opacity = '0';
+            authorEl.style.opacity = '0';
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * quotes.length);
+                quoteEl.textContent = `"${quotes[randomIndex].quote}"`;
+                authorEl.textContent = quotes[randomIndex].author;
+                quoteEl.style.opacity = '1';
+                authorEl.style.opacity = '1';
+            }, 200);
+        }
+    </script>
+
+</body>
+
+</html>
